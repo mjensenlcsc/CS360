@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "engines": {
+    "node": "7.8.0"
+  },
   "scripts": {
     "start": "node app.js"
   },
