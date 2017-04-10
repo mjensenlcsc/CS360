@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const flash = require('express-flash');
 const session = require('express-session');
+const passport = require('passport');
 
 // App setup
 app.set('views', path.join(__dirname, 'Views'));
