@@ -39,16 +39,6 @@ app.use(function(req, res, next) {
 	}
 
 	let protocol = req.protocol;
-
-	// Redirect to secure official domain if we're not secure or not on the official domain.
-	if (req.hostname == "bitbossbattles.herokuapp.com" || protocol != "https")
-	{
-		res.redirect(301, "https://www.bitbossbattles.io" + req.originalUrl);
-	}
-	else
-	{
-		next();
-	}
 });
 
 // Mount the routers.
