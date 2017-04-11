@@ -26,7 +26,7 @@ let routes = require('./Subapps/router');
 // Start listening
 server.listen(Number(process.env.PORT || "5000"), function() {
 
-	console.log("Listening...");
+	console.log("Listening....");
 });
 
 app.use(function(req, res, next) {
