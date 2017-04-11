@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const flash = require('express-flash');
 const session = require('express-session');
-const passport = require('passport');
 
 // App setup
 app.set('views', path.join(__dirname, 'Views'));
@@ -20,8 +19,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'Public')));
 app.use(session({ secret: process.env.SECRET }));
 app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session())
 
 // Router setup
 let routes = require('./Subapps/router');
@@ -52,13 +49,6 @@ app.use(function(req, res, next) {
 	{
 		next();
 	}
-});
-
-app.use(function checkAuth(req, res, next) {
-	if (req.url.startsWith('/admin') && (!req.session || !req.session.authenticated)) {
-		res.render('unauthorised', { status: 403 });
-	}
-	next();
 });
 
 // Mount the routers.

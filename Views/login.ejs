@@ -30,18 +30,13 @@
 							<p>Enter a username and password.</p>
 							<form method="post">
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="text" name="username">
-									<label class="mdl-textfield__label" for="username">Username</label>
+									<input class="mdl-textfield__input" type="text" name="username" placeholder="Username">
 								</div>
 								<div class="mdl-textfield mdl-js-textfield">
-									<input class="mdl-textfield__input" type="password" name="password">
-									<label class="mdl-textfield__label" for="password">Password</label>
+									<input class="mdl-textfield__input" type="password" name="password" placeholder="Password">
 								</div>
 								<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
 							</form>
-							<% if (message) { %>
-								<h3><%= message %> </h3>
-							<% } %>
                         </div>
                     </div>
                 </section>
