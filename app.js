@@ -29,6 +29,18 @@ server.listen(Number(process.env.PORT || "5000"), function() {
 	console.log("Listening....");
 });
 
+app.use(function(req, res, next) {
+
+	// Skip checks if we're running local.
+	if (req.hostname == "localhost")
+	{
+		next();
+		return;
+	}
+
+	let protocol = req.protocol;
+});
+
 // Mount the routers.
 app.use('/', routes.router);
 

@@ -28,6 +28,9 @@
                     <div class="page-content">
 						<div id="LoginMainDiv">
 							<p>Enter a username and password.</p>
+							<% if (message) { %>
+								<h3><%= message %></h3>
+							<% } %>
 							<form method="post">
 								<div class="mdl-textfield mdl-js-textfield">
 									<input class="mdl-textfield__input" type="text" name="username" placeholder="Username">

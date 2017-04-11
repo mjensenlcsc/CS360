@@ -27,7 +27,7 @@ router.get('/admin*', isAuthenticated, function(req, res, next) {
 });
 
 router.get('/admin', function(req, res) {
-	res.render('/admin/index');
+	res.render('admin/index');
 });
 
 router.get('/admin/account', function(req, res) {
@@ -56,7 +56,7 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', function(req, res) {
-	if (req.body.user && req.body.user === 'user' && req.body.password && req.body.password === 'pass') {
+	if (req.body.username && req.body.username === 'user' && req.body.password && req.body.password === 'pass') {
 		req.session.auth = true;
 		res.redirect('/admin');
 	} else {
@@ -72,5 +72,5 @@ module.exports = {
 
 function isAuthenticated(req, res, next) {
 	if (req.session.auth) return next();
-	else res.redirect('/unauthorised');
+	else res.redirect('/no');
 }
