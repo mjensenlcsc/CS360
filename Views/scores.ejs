@@ -27,10 +27,19 @@
 						<div id="ScoreMainDiv">
 							<!-- These are currently not in order. Not really sure why? -->
 							<% for (var team = 0; team < Object.keys(teams).length; team++) { %>
-								<div class="scores">
-									<%= teams[team.toString()].Name %> </hr>
-									<%= teams[team.toString()].Score %>
-								</div>
+								<table>
+									<thead><%= teams[team].Name %></thead>
+									<tbody>
+										<tr>
+											<td>Score: <%= teams[team].Score %></td>
+											<td>Draws: <%= teams[team].Record.Draws %></td>
+										</tr>
+										<tr>
+											<td>Wins: <%= teams[team].Record.Wins %></td>
+											<td>Losses: <%= teams[team].Record.Losses %></td>
+										</tr>
+									</tbody>
+								</table>
 							<% } %>
                         </div>
                     </div>
