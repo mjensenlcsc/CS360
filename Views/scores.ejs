@@ -25,7 +25,13 @@
                 <section class="mdl-layout__tab-panel is-active" id="ScoresMainTab">
                     <div class="page-content">
 						<div id="ScoreMainDiv">
-							<p>This is the score.</p>
+							<!-- These are currently not in order. Not really sure why? -->
+							<% for (var team = 0; team < Object.keys(teams).length; team++) { %>
+								<div class="scores">
+									<%= teams[team.toString()].Name %> </hr>
+									<%= teams[team.toString()].Score %>
+								</div>
+							<% } %>
                         </div>
                     </div>
                 </section>

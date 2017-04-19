@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
+const ejs = require('ejs');
+
+const variables = require('../variables');
 
 router.get('/index.html', (req, res) => {
 	res.redirect('/');
@@ -15,7 +18,10 @@ router.get('/schedule', function(req, res) {
 });
 
 router.get('/scores', function(req, res) {
-	res.render('scores');
+	ejs.renderFile(__dirname + '/../Views/scores.ejs', {teams: variables.teams}, function(err, str){
+		console.info(err || str)
+		res.end(ejs.render(str))
+	});
 });
 
 router.get('/no', function(req, res) {
