@@ -17,8 +17,12 @@
     "ejs": "^2.2.4",
     "express": "^4.11.2",
     "express-flash": "0.0.2",
+<<<<<<< HEAD
     "express-session": "^1.15.2",
     "firebase": "^3.7.7",
+=======
+	"express-session": "^1.15.2",
+>>>>>>> 6d885e5c09c3483999dbd48ce0fc4d1966d67058
     "mongoose": "^4.9.4",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",

@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 6d885e5c09c3483999dbd48ce0fc4d1966d67058
 # Node build artifacts
 node_modules
 npm-debug.log
@@ -11,6 +14,7 @@ npm-debug.log
 # Docker
 Dockerfile
 docker-compose.yml
+<<<<<<< HEAD
 =======
 ### Node ###
 # Logs
@@ -155,3 +159,5 @@ ENV/
 # Rope project settings
 .ropeproject
 >>>>>>> 3bb59fbfcf8d230f4304186dda438afdcac39d26
+=======
+>>>>>>> 6d885e5c09c3483999dbd48ce0fc4d1966d67058
