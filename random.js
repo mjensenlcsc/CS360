@@ -42,20 +42,13 @@ function create_schedule(list) {
 function getSchedule(teamN) {
 	let teams = [];
 	let s = [];
-	for (let i = 0; i < teamN; i++) teams.push(i);
 	let current = [];
-	for (round of create_schedule(teams)) {
+	for (let i = 0; i < teamN; i++) teams.push(i);
+	let os = create_schedule(teams);
+	os = os.concat(create_schedule(teams));
+	os = shuffle(os);
+	for (round of os) {
 		if (current.length < 3) current.push(round);
-		else {
-			s.push(current);
-			current = [];
-			current.push(round)
-		}
-	}
-	for (round of create_schedule(teams)) {
-		if (current.length < 3) {
-			current.push(round);
-		}
 		else {
 			s.push(current);
 			current = [];
