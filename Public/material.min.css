@@ -6578,9 +6578,9 @@ iframe.heightSet {
 	padding-left: 5%;
 	width: 33%;
 }
-@media screen and (max-width: 320 px) {
+@media screen and (max-width: 900 px) {
 	.mdl-layout__tab {
 		height: 20%;
-		font-size: 115%;
+		font-size: 200%;
 	}
 }
