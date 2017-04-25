@@ -28,11 +28,15 @@
 						<div id="ScoreMainDiv">
 							<!-- These are currently not in order. Not really sure why? -->
 							<% for (var team = 0; team < Object.keys(teams).length; team++) { %>
-								<table>
-									<thead style="font-weight: bold;text-decoration: underline;"><%= teams[team].Name %>: Score <%= teams[team].Score %></thead>
+								<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+									<thead>
+										<tr>
+											<th class="mdl-data-table__cell--non-numeric"><%= teams[team].Name %>: Score <%= teams[team].Score %></th>
+										</tr>
+									</thead>
 									<tbody>
 										<tr>
-											<td> <%= teams[team].Record.Wins %>/<%= teams[team].Record.Losses %>/<%= teams[team].Record.Draws %></td>
+											<th class="mdl-data-table__cell--non-numeric"><%= teams[team].Record.Wins %>/<%= teams[team].Record.Losses %>/<%= teams[team].Record.Draws %></th>
 										</tr>
 									</tbody>
 								</table>
