@@ -9,6 +9,7 @@
 @charset "UTF-8";
 html {
     color: rgba(0, 0, 0, .87)
+	overflow-x: hidden !important;
 }
 ::-moz-selection {
     background: #b3d4fc;
@@ -4425,7 +4426,7 @@ transition-property:background-color;
     left: 0;
     top: 0;
     z-index: 1;
-    overflow: hidden
+    overflow: hidden;
 }
 .mdl-layout__tab .mdl-layout__tab-ripple-container .mdl-ripple {
     background-color: rgb(255, 255, 255)
@@ -6547,7 +6548,7 @@ fieldset[disabled] .mdl-textfield .mdl-textfield__label,
     }
 }
 body {
-    margin: 0
+    margin: 0;
 }
 .styleguide-demo h1 {
     margin: 48px 24px 0
