@@ -10,7 +10,7 @@ router.get('/index.html', (req, res) => {
 });
 
 router.get('/', function(req, res) {
-	res.render('index');
+	res.render('schedule');
 });
 
 router.get('/schedule', function(req, res) {
