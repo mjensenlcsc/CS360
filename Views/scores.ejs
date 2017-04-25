@@ -29,7 +29,7 @@
 							<!-- These are currently not in order. Not really sure why? -->
 							<% for (var team = 0; team < Object.keys(teams).length; team++) { %>
 								<table>
-									<thead class="team"><%= teams[team].Name %>: Score <%= teams[team].Score %></thead>
+									<thead style="font-weight: bold;text-decoration: underline;"><%= teams[team].Name %>: Score <%= teams[team].Score %></thead>
 									<tbody>
 										<tr>
 											<td> <%= teams[team].Record.Wins %>/<%= teams[team].Record.Losses %>/<%= teams[team].Record.Draws %></td>
