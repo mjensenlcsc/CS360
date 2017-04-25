@@ -2806,6 +2806,9 @@ fieldset[disabled] .mdl-checkbox .mdl-checkbox__ripple-container .mdl-ripple,
   white-space: nowrap;
   font-size: 13px;
   background-color: #fff;
+  float: left;
+  margin: 5px;
+  background-color: #b3d4fc;
 =======
     position: relative;
     border: 1px solid rgba(0, 0, 0, .12);
@@ -2845,7 +2848,7 @@ transition-property:background-color;
     background-color: #e0e0e0
 }
 .mdl-data-table tbody tr:hover {
-    background-color: #eee
+    background-color: #bed3ff
 >>>>>>> d539e25659c4796ce90514f39d68048f53f41752
 }
 .mdl-data-table td {
