@@ -31,15 +31,26 @@
 								<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 									<thead>
 										<tr>
-											<th class="mdl-data-table__cell--non-numeric"><%= teams[team].Name %>: Score <%= teams[team].Score %></th>
+											<th class="mdl-data-table__cell--non-numeric"><%= teams[team].Name %></th>
+											<th>Score - <%= teams[team].Score %></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<th class="mdl-data-table__cell--non-numeric"><%= teams[team].Record.Wins %>/<%= teams[team].Record.Losses %>/<%= teams[team].Record.Draws %></th>
+											<td class="mdl-data-table__cell--non-numeric">Wins</td>
+	          								<td><%= teams[team].Record.Wins %></td>
+										</tr>
+										<tr>
+											<td class="mdl-data-table__cell--non-numeric">Losses</td>
+	          								<td><%= teams[team].Record.Losses %></td>
+										</tr>
+										<tr>
+											<td class="mdl-data-table__cell--non-numeric">Draws</td>
+	          								<td><%= teams[team].Record.Draws %></td>
 										</tr>
 									</tbody>
 								</table>
+								</br>
 							<% } %>
                         </div>
                     </div>

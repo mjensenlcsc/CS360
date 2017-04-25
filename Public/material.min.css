@@ -2739,6 +2739,7 @@ margin-top:0;
 
 .mdl-data-table tbody tr {
 position:relative;
+text-align:right;
 height:48px;
 transition-duration:.28s;
 transition-timing-function:cubic-bezier(.4,0,.2,1);
