@@ -2722,7 +2722,6 @@ padding-left:0;
 
 .mdl-data-table {
 position:relative;
-border:1px solid rgba(0,0,0,.12);
 border-collapse:collapse;
 white-space:nowrap;
 font-size:13px;
@@ -2731,6 +2730,7 @@ background-color:#fff;
 
 .mdl-data-table thead {
 padding-bottom:3px;
+border:1px solid rgba(0,0,0,.12);
 }
 
 .mdl-data-table thead .mdl-data-table__select {
@@ -6335,4 +6335,8 @@ margin-left:91.6666666667%;
 .mdl-grid--no-spacing>.mdl-cell,.mdl-grid--no-spacing>.mdl-cell--4-col,.mdl-grid--no-spacing>.mdl-cell--4-col-desktop.mdl-cell--4-col-desktop {
 width:33.3333333333%;
 }
+}
+.team{
+    font-weight: bold;
+    text-decoration: underline;
 }

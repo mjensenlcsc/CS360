@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="./material.min.css">
 		<script src="./material.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
@@ -28,15 +29,10 @@
 							<!-- These are currently not in order. Not really sure why? -->
 							<% for (var team = 0; team < Object.keys(teams).length; team++) { %>
 								<table>
-									<thead><%= teams[team].Name %></thead>
+									<thead class="team"><%= teams[team].Name %>: Score <%= teams[team].Score %></thead>
 									<tbody>
 										<tr>
-											<td>Score: <%= teams[team].Score %></td>
-											<td>Draws: <%= teams[team].Record.Draws %></td>
-										</tr>
-										<tr>
-											<td>Wins: <%= teams[team].Record.Wins %></td>
-											<td>Losses: <%= teams[team].Record.Losses %></td>
+											<td> <%= teams[team].Record.Wins %>/<%= teams[team].Record.Losses %>/<%= teams[team].Record.Draws %></td>
 										</tr>
 									</tbody>
 								</table>
