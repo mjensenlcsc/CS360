@@ -4272,7 +4272,7 @@ transition-property:background-color;
     display: flex;
     background-color: rgb(63, 81, 181);
     overflow-y: hidden;
-    overflow-x: scroll
+    overflow-x: hidden;
 }
 .mdl-layout__tab-bar::-webkit-scrollbar {
     display: none
