@@ -19,7 +19,6 @@ router.get('/schedule', function(req, res) {
 
 router.get('/scores', function(req, res) {
 	ejs.renderFile(__dirname + '/../Views/scores.ejs', {teams: variables.teams}, function(err, str){
-		console.info(err || str)
 		res.end(ejs.render(str))
 	});
 });

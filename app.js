@@ -32,16 +32,8 @@ server.listen(Number(process.env.PORT || "5000"), function() {
 });
 
 app.use(function(req, res, next) {
-
-	console.info(req.hostname)
-	// Skip checks if we're running local.
-	if (req.hostname == "localhost" || req.hostname == 'cs360.herokuapp.com')
-	{
-		next();
-		return;
-	}
-
-	let protocol = req.protocol;
+	next();
+	return;
 });
 
 // Mount the routers.
