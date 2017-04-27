@@ -105,7 +105,7 @@ function addDraw(t1, t2, game) {
 	db.ref('current/games/' + game).update(variables.games[game]);
 }
 
-createSchedule(null, variables.teamNames);
+/*createSchedule(null, variables.teamNames);
 addWin(3, 111);
 addLoss(0, 111);
-addDraw(4, 5, 123);
+addDraw(4, 5, 123);*/
