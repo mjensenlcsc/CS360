@@ -1,6 +1,7 @@
 const variables = {
 	teams: {},
 	games: {},
-	weeks: {}
+	weeks: {},
+	teamNames: []
 }
 module.exports = variables;

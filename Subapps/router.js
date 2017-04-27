@@ -19,7 +19,6 @@ router.get('/schedule', function(req, res) {
 
 router.get('/scores', function(req, res) {
 	ejs.renderFile(__dirname + '/../Views/scores.ejs', {teams: variables.teams}, function(err, str){
-		console.info(err || str)
 		res.end(ejs.render(str))
 	});
 });
@@ -46,15 +45,25 @@ router.get('/admin/logout', function(req, res) {
 });
 
 router.get('/admin/schedule', function(req, res) {
+	if (variables.teamNames.length < 2) {
+		req.flash('message', 'You must add teams before you can modify the schedule.');
+		res.redirect('/admin/teams');
+		return;
+	}
 	res.render('admin/schedule');
 });
 
 router.get('/admin/scores', function(req, res) {
+	if (!variables.teams['0']) {
+		req.flash('message', 'You must add teams before you can modify the scores.');
+		res.redirect('/admin/teams');
+		return;
+	}
 	res.render('admin/scores');
 });
 
 router.get('/admin/teams', function(req, res) {
-	res.render('admin/teams');
+	res.render('admin/teams', { message: req.flash('message') });
 });
 
 router.get('/login', function(req, res) {
