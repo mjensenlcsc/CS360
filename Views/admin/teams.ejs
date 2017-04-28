@@ -6,6 +6,7 @@
 
 		<link rel="stylesheet" href="../materialAdmin.min.css">
 		<script src="../material.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
@@ -25,20 +26,43 @@
 
 			<main class="mdl-layout__content">
 				<section class="mdl-layout__tab-panel is-active" id="TeamsAdminTab">
-          <% if (message) { %>
-            <h3><%= message %></h3>
-          <% } %>
+              		<% if (message) { %>
+              			<h3><%= message %></h3>
+          			<% } %>
 				</section>
-			<form>
-				Number of Teams(2 - 10)
-				<input type="number" name="TeamNum" min="2" max="10" value="2"><br>
-				Team #1: <input type="text" name="Team1"><br>
-				Team #2: <input type="text" name="Team2"><br>
-				<!-- Need to add javascript for more inputs when needed -->
-				<button type="button">Submit</button>
-			</form>
-			
+				<form method="POST" id="teamForm">
+					Number of Teams(2 - 10)
+					<select id="teamNumbers" form="teamForm">
+						<option value="2" selected>2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+					<div id="teamList">
+						<div class="mdl-textfield mdl-js-textfield"><input class="mdl-textfield__input" type="text" name="Team1" placeholder="Team #1"></div></br>
+						<div class="mdl-textfield mdl-js-textfield"><input class="mdl-textfield__input" type="text" name="Team2" placeholder="Team #2"></div></br>
+					</div>
+					<script>
+						$('#teamNumbers').change(function(){
+							console.log('Change')
+							var myNode = document.getElementById('teamList');
+							while(myNode.firstChild) {
+								myNode.removeChild(myNode.firstChild);
+							}
+							var value = $('#teamNumbers').val();
+							for (var i = 0; i < value; i++) {
+								document.getElementById('teamList').innerHTML += '<div class="mdl-textfield mdl-js-textfield"><input class="mdl-textfield__input" type="text" name="Team' + i+1 + '" placeholder="Team #' + i+1 + '"></div></br>';
+							}
+						});
+					</script>
+					<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Add Teams">
+				</form>
 			</main>
-        </div>
+    	</div>
     </body>
 </html>
