@@ -49,14 +49,13 @@
 					</div>
 					<script>
 						$('#teamNumbers').change(function(){
-							console.log('Change')
 							var myNode = document.getElementById('teamList');
 							while(myNode.firstChild) {
 								myNode.removeChild(myNode.firstChild);
 							}
 							var value = $('#teamNumbers').val();
 							for (var i = 0; i < value; i++) {
-								document.getElementById('teamList').innerHTML += '<div class="mdl-textfield mdl-js-textfield"><input class="mdl-textfield__input" type="text" name="Team' + i+1 + '" placeholder="Team #' + i+1 + '"></div></br>';
+								document.getElementById('teamList').innerHTML += '<div class="mdl-textfield mdl-js-textfield"><input class="mdl-textfield__input" type="text" name="Team' + parseInt(i+1) + '" placeholder="Team #' + parseInt(i+1) + '"></div></br>';
 							}
 						});
 					</script>
