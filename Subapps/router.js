@@ -81,6 +81,10 @@ router.post('/login', function(req, res) {
 	}
 });
 
+router.post('/admin/teams', function(req, res) {
+	res.render('/scores');
+});
+
 
 module.exports = {
 	router: router
