@@ -44,8 +44,8 @@
 						<option value="10">10</option>
 					</select>
 					<div id="teamList">
-						<div class="mdl-textfield mdl-js-textfield"><input class="mdl-textfield__input" type="text" name="Team1" placeholder="Team #1"></div></br>
-						<div class="mdl-textfield mdl-js-textfield"><input class="mdl-textfield__input" type="text" name="Team2" placeholder="Team #2"></div></br>
+						<div class="mdl-textfield mdl-js-textfield"><input class="mdl-textfield__input" type="text" name="Team1" placeholder="Team #1" required></div></br>
+						<div class="mdl-textfield mdl-js-textfield"><input class="mdl-textfield__input" type="text" name="Team2" placeholder="Team #2" required></div></br>
 					</div>
 					<script>
 						$('#teamNumbers').change(function(){
@@ -55,7 +55,7 @@
 							}
 							var value = $('#teamNumbers').val();
 							for (var i = 0; i < value; i++) {
-								document.getElementById('teamList').innerHTML += '<div class="mdl-textfield mdl-js-textfield"><input class="mdl-textfield__input" type="text" name="Team' + parseInt(i+1) + '" placeholder="Team #' + parseInt(i+1) + '"></div></br>';
+								document.getElementById('teamList').innerHTML += '<div class="mdl-textfield mdl-js-textfield"><input class="mdl-textfield__input" type="text" name="Team' + parseInt(i+1) + '" placeholder="Team #' + parseInt(i+1) + '" required></div></br>';
 							}
 						});
 					</script>
