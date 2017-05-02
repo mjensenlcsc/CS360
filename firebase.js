@@ -76,6 +76,7 @@ function createSchedule(startDate, teamNames) {
   variables.games = games;
   variables.weeks = weeks;
 }
+module.exports.createSchedule = createSchedule;
 
 function addWin(winner, game) {
 	variables.teams[winner].Score += 5;
@@ -84,6 +85,7 @@ function addWin(winner, game) {
 	variables.games[game].Winner = winner;
 	db.ref('current/games/' + game).update(variables.games[game]);
 }
+module.exports.addWin = addWin;
 
 function addLoss(loser, game) {
 	variables.teams[loser].Score += 1;
@@ -105,7 +107,8 @@ function addDraw(t1, t2, game) {
 	db.ref('current/games/' + game).update(variables.games[game]);
 }
 
-/*createSchedule(null, variables.teamNames);
+
+createSchedule(null, variables.teamNames);
 addWin(3, 111);
 addLoss(0, 111);
-addDraw(4, 5, 123);*/
+addDraw(4, 5, 123);
