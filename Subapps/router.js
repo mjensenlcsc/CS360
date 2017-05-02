@@ -36,7 +36,7 @@ router.get('/admin', function(req, res) {
 });
 
 router.get('/admin/account', function(req, res) {
-	res.render('admin/account');
+	res.render('admin/account', { isOwner: req.session.username == process.env.OWNER_NAME });
 });
 
 router.get('/admin/logout', function(req, res) {
@@ -71,8 +71,9 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', function(req, res) {
-	if (req.body.username && req.body.username === 'user' && req.body.password && req.body.password === 'pass') {
+	if ((req.body.username && req.body.username === 'user' && req.body.password && req.body.password === 'pass') || (req.body.username && req.body.username === 'test' && req.body.password && req.body.password === 'pass')) {
 		req.session.auth = true;
+		req.session.username = req.body.username;
 		res.redirect('/admin');
 	} else {
 		req.flash('message', 'Invalid username or password.');
