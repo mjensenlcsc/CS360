@@ -4,6 +4,7 @@ const request = require('request');
 const ejs = require('ejs');
 
 const variables = require('../variables');
+const firebase = require('../firebase');
 
 router.get('/index.html', (req, res) => {
 	res.redirect('/');
@@ -36,7 +37,6 @@ router.get('/admin', function(req, res) {
 });
 
 router.get('/admin/account', function(req, res) {
-	console.log(req.session.username == process.env.OWNER_NAME)
 	res.render('admin/account', { isOwner: req.session.username == process.env.OWNER_NAME });
 });
 
@@ -83,7 +83,12 @@ router.post('/login', function(req, res) {
 	}
 });
 
-router.post('/admin/teams', function(req, res) {
+router.post('/admin/teams', function(req, res) { // Do the teams and schedule thing
+	variables.teamNames = [];
+	for (let team of Object.values(req.body)) { // Team is now the name of the team
+		variables.teamNames.push(team);
+	}
+	firebase.createSchedule(variables.teamNames);
 	res.redirect('/scores');
 });
 

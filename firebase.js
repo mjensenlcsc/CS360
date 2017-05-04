@@ -21,7 +21,7 @@ let config = {
 firebase.initializeApp(config);
 let db = firebase.database();
 
-function createSchedule(startDate, teamNames) {
+function createSchedule(teamNames) {
 	teamNames = random.shuffle(teamNames);
 	let n = 0;
 	let teams = {};
@@ -106,9 +106,3 @@ function addDraw(t1, t2, game) {
 	variables.games[game].Loser = 'DRAW';
 	db.ref('current/games/' + game).update(variables.games[game]);
 }
-
-
-createSchedule(null, variables.teamNames);
-addWin(3, 111);
-addLoss(0, 111);
-addDraw(4, 5, 123);
