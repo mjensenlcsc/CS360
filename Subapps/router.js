@@ -36,11 +36,13 @@ router.get('/admin', function(req, res) {
 });
 
 router.get('/admin/account', function(req, res) {
+	console.log(req.session.username == process.env.OWNER_NAME)
 	res.render('admin/account', { isOwner: req.session.username == process.env.OWNER_NAME });
 });
 
 router.get('/admin/logout', function(req, res) {
 	delete req.session.auth;
+	delete req.session.username;
 	res.redirect('/');
 });
 
@@ -82,7 +84,7 @@ router.post('/login', function(req, res) {
 });
 
 router.post('/admin/teams', function(req, res) {
-	res.render('/scores');
+	res.redirect('/scores');
 });
 
 
