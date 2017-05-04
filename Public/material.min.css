@@ -167,7 +167,8 @@ body {
     font-family: "Helvetica", "Arial", sans-serif;
     font-size: 20px;
     font-weight: 400;
-    line-height: 20px
+    line-height: 20px;
+	background-color: grey;
 }
 h1,
 h2,
@@ -176,7 +177,8 @@ h4,
 h5,
 h6,
 p {
-    padding: 0
+    padding: 0;
+	color: rgb(68, 138, 255);
 }
 h1 small,
 h2 small,
@@ -4438,7 +4440,8 @@ transition-property:background-color;
     display: none
 }
 .mdl-layout.is-upgraded .mdl-layout__tab-panel.is-active {
-    display: block
+    display: block;
+	background-color: rgba(0,0,0, .70);
 }
 .mdl-radio {
     position: relative;
