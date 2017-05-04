@@ -5560,7 +5560,7 @@ fieldset[disabled] .mdl-switch .mdl-switch__ripple-container .mdl-ripple,
     margin: 0;
     padding: 4px 0;
     width: 100%;
-    background: 0 0;
+    background-color: white;
     text-align: left;
     color: inherit
 }
