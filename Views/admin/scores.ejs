@@ -26,16 +26,34 @@
 			<main class="mdl-layout__content">
 				<section class="mdl-layout__tab-panel is-active" id="ScoresAdminTab">
 				</section>
-				<h2> Week 1</h2>
-				<h3 style="text-indent: 3em;"> 10:00 AM </h3>
-				<form>
-					<form action="" style="text-indent: 12em;">
-						<input type="radio" name="game000" value="Team1" > Team1
-						<input type="radio" name="game000" value="Team2"> Team2
-						<input type="radio" name="game000" value="Draw"> Draw
-						<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Confirm">
-					</form><br>
-				<br><input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Confirm All">
+				<form action="/admin/scores" method="post" id="all">
+					<% if (message) { %>
+						<h2><%= message %></h2>
+					<% } %>
+					<%for (var week in weeks) { %>
+						<h2>Week <%= week %></h2>
+						<% for (var time in weeks[week]) { %>
+							<h3 style="text-indent: 3em;">Time #<%= time %></h3>
+							<% for (var game in weeks[week][time]) { %>
+								<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%= week.toString() + time.toString() + game.toString()%>1">
+									<input type="radio" id="<%= week.toString() + time.toString() + game.toString()%>1" class="mdl-radio__button" name="<%= week.toString() + time.toString() + game.toString()%>" value="1">
+									<span class="mdl-radio__label"><%= teams[weeks[week][time][game].Black].Name %></span>
+								</label>
+								<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%= week.toString() + time.toString() + game.toString()%>2">
+									<input type="radio" id="<%= week.toString() + time.toString() + game.toString()%>2" class="mdl-radio__button" name="<%= week.toString() + time.toString() + game.toString()%>" value="2">
+									<span class="mdl-radio__label"><%= teams[weeks[week][time][game].White].Name %></span>
+								</label>
+								<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%= week.toString() + time.toString() + game.toString()%>3">
+									<input type="radio" id="<%= week.toString() + time.toString() + game.toString()%>3" class="mdl-radio__button" name="<%= week.toString() + time.toString() + game.toString()%>" value="3">
+									<span class="mdl-radio__label">Draw</span>
+								</label>
+								</br>
+							<% } %>
+							<hr>
+						<% } %>
+						<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Confirm" form="all">
+					<% } %>
+					<br><input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Confirm" form="all">
 				</form>
 			</main>
         </div>

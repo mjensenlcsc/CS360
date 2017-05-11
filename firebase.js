@@ -90,6 +90,7 @@ function createSchedule(teamNames) {
 module.exports.createSchedule = createSchedule;
 
 function addWin(winner, game) {
+	if (variables.games[game].Winner) return;
 	variables.teams[winner].Score += 5;
 	variables.teams[winner].Record.Wins++;
 	db.ref('current/teams/' + winner).update(variables.teams[winner]);
@@ -99,14 +100,17 @@ function addWin(winner, game) {
 module.exports.addWin = addWin;
 
 function addLoss(loser, game) {
+	if (variables.games[game].Winner) return;
 	variables.teams[loser].Score += 1;
 	variables.teams[loser].Record.Losses++;
 	db.ref('current/teams/' + loser).update(variables.teams[loser]);
 	variables.games[game].Loser = loser;
 	db.ref('current/games/' + game).update(variables.games[game]);
 }
+module.exports.addLoss = addLoss;
 
 function addDraw(t1, t2, game) {
+	if (variables.games[game].Winner) return;
 	variables.teams[t1].Score += 3;
 	variables.teams[t2].Score += 3;
 	variables.teams[t1].Record.Draws++;
@@ -117,3 +121,4 @@ function addDraw(t1, t2, game) {
 	variables.games[game].Loser = 'DRAW';
 	db.ref('current/games/' + game).update(variables.games[game]);
 }
+module.exports.addDraw = addDraw;

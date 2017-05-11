@@ -12,7 +12,7 @@ router.get('/index.html', (req, res) => {
 });
 
 router.get('/', function(req, res) {
-	res.render('schedule');
+	res.redirect('/schedule');
 });
 
 router.get('/schedule', function(req, res) {
@@ -66,7 +66,7 @@ router.get('/admin/scores', function(req, res) {
 		res.redirect('/admin/teams');
 		return;
 	}
-	res.render('admin/scores');
+	res.render('admin/scores', {weeks: variables.weeks, teams: variables.teams, message: req.flash('message')});
 });
 
 router.get('/admin/teams', function(req, res) {
@@ -145,6 +145,28 @@ router.post('/admin/createaccount', function(req, res) {
 	} else {
 		req.flash('message', 'Passwords do not match.');
 		res.redirect('/admin/account');
+	}
+});
+
+router.post('/admin/scores', function(req, res) {
+	for (var score in req.body) {
+		let week = Math.floor(score / 100);
+		let time = Math.floor((score - week * 100) / 10);
+		let game = Math.floor(score - week * 100 - time * 10);
+		let result = parseInt(req.body[score]);
+		let GAME = variables.weeks[week][time][game];
+
+		if (result === 1) { // Black won
+			firebase.addWin(GAME.Black, score);
+			firebase.addLoss(GAME.White, score);
+		} else if (result === 2) { // White won
+			firebase.addWin(GAME.White, score);
+			firebase.addLoss(GAME.Black, score);
+		} else if (result === 3) { //Draw
+			firebase.addDraw(GAME.White, GAME.Black, score);
+		} else {
+			console.error('Someone did something wrong.')
+		}
 	}
 });
 
