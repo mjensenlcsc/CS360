@@ -38,7 +38,7 @@ router.get('/admin*', authenticate.isAuthenticated, function(req, res, next) {
 });
 
 router.get('/admin', function(req, res) {
-	res.render('admin/scores');
+	res.redirect('/admin/scores');
 });
 
 router.get('/admin/account', function(req, res) {
