@@ -1,4 +1,5 @@
 const firebase = require('firebase');
+module.exports.firebase = firebase;
 
 const random = require('./random');
 const variables = require('./variables');

@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'Public')));
-app.use(session({ secret: process.env.SECRET }));
+app.use(session({ secret: process.env.SECRET || 'test'}));
 app.use(flash());
 
 // Router setup

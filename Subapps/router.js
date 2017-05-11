@@ -3,6 +3,7 @@ const router = express.Router();
 const request = require('request');
 const ejs = require('ejs');
 
+const authenticate = require('./auth');
 const variables = require('../variables');
 const firebase = require('../firebase');
 
@@ -28,7 +29,7 @@ router.get('/no', function(req, res) {
 	res.render('unauthorised');
 });
 
-router.get('/admin*', isAuthenticated, function(req, res, next) {
+router.get('/admin*', authenticate.isAuthenticated, function(req, res, next) {
 	next();
 });
 
@@ -37,7 +38,7 @@ router.get('/admin', function(req, res) {
 });
 
 router.get('/admin/account', function(req, res) {
-	res.render('admin/account', { isOwner: req.session.username == process.env.OWNER_NAME });
+	res.render('admin/account', { isOwner: firebase.firebase.auth().currentUser.email.split('@')[0] === 'owner', passFail: null, message: req.flash('message') });
 });
 
 router.get('/admin/logout', function(req, res) {
@@ -73,14 +74,19 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', function(req, res) {
-	if ((req.body.username && req.body.username === 'user' && req.body.password && req.body.password === 'pass') || (req.body.username && req.body.username === 'test' && req.body.password && req.body.password === 'pass')) {
-		req.session.auth = true;
-		req.session.username = req.body.username;
-		res.redirect('/admin');
-	} else {
-		req.flash('message', 'Invalid username or password.');
-		res.redirect('/login');
-	}
+	firebase.firebase.auth().signInWithEmailAndPassword(req.body.username + '@chess.com', req.body.password).then(function() {res.redirect('/admin');}).catch(function(err) {
+		let errCode = err.code;
+		let errMessage = err.message;
+
+		if (errCode === 'auth/wrong-password') {
+			req.flash('message', 'Invalid username or password.');
+			res.redirect('/login');
+		} else {
+			req.flash('message', errMessage);
+			res.redirect('/login');
+		}
+		console.info(err);
+	});
 });
 
 router.post('/admin/teams', function(req, res) { // Do the teams and schedule thing
@@ -89,7 +95,27 @@ router.post('/admin/teams', function(req, res) { // Do the teams and schedule th
 		variables.teamNames.push(team);
 	}
 	firebase.createSchedule(variables.teamNames);
-	res.redirect('/scores');
+	res.redirect('/admin/scores');
+});
+
+router.post('/admin/modifyaccount', function(req, res) {
+	if (req.body.password === req.body.passwordC) {
+		if (req.body.password.length < 6) {
+			req.flash('message', 'Password must be at least 6 characters long.');
+			res.redirect('/admin/account');
+			return;
+		}
+		firebase.firebase.auth().currentUser.updatePassword(req.body.password).then(function() {
+			req.flash('message', 'Password updated.');
+			res.redirect('/admin/account');
+		}, function(er) { // If it has been too long, reauthenticate.
+			req.flash('message', 'Please sign in again before doing that.');
+			res.redirect('/login')
+		});
+	} else {
+		req.flash('message', 'Passwords do not match.');
+		res.redirect('/admin/account');
+	}
 });
 
 
