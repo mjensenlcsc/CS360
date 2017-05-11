@@ -4441,7 +4441,6 @@ transition-property:background-color;
 }
 .mdl-layout.is-upgraded .mdl-layout__tab-panel.is-active {
     display: block;
-	background-color: rgba(0,0,0, .70);
 }
 .mdl-radio {
     position: relative;
