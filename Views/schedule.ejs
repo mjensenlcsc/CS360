@@ -36,7 +36,7 @@
 									<h3 style="text-indent: 3em;">Time #<%= time %></h3>
 									<% for (var game in weeks[week][time]) { %>
 										<% if (weeks[week][time][game] == null) continue; %>
-										<p style ="text-indent: 12em;"><%= teams[weeks[week][time][game].Black].Name %> vs <%= teams[weeks[week][time][game].White].Name %></p>
+										<p style ="text-indent: 12em;"><%= teams[weeks[week][time][game].Black] ? teams[weeks[week][time][game].Black].Name : 'BYE' %> vs <%= teams[weeks[week][time][game].White] ? teams[weeks[week][time][game].White].Name : 'BYE'%></p>
 									<% } %>
 								<% } %>
 							<% } %>

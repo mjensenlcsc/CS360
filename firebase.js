@@ -132,3 +132,8 @@ function addDraw(t1, t2, game) {
 	db.ref('current/games/' + game).update(variables.games[game]);
 }
 module.exports.addDraw = addDraw;
+
+function storePrevious() {
+	db.ref('old/' + Date.now()).set(variables);
+}
+module.exports.storePrevious = storePrevious;

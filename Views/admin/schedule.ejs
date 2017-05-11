@@ -34,7 +34,7 @@
 							<h3 style="text-indent: 3em;">Time #<%= time %></h3>
 							<% for (var game in weeks[week][time]) { %>
 								<% if (weeks[week][time][game] == null) continue; %>
-								<span><form id="<%= week %><%= time %><%= game %>" method="post" action="/admin/schedule"><input type="hidden" name="id" value="<%= week %><%= time %><%= game %>"><input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Reschedule" style="display: inline;" form="<%= week %><%= time %><%= game %>">   <%= teams[weeks[week][time][game].Black].Name %> vs <%= teams[weeks[week][time][game].White].Name %> </form><br><br></span>
+								<span><form id="<%= week %><%= time %><%= game %>" method="post" action="/admin/schedule"><input type="hidden" name="id" value="<%= week %><%= time %><%= game %>"><input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Reschedule" style="display: inline;" form="<%= week %><%= time %><%= game %>">   <%= teams[weeks[week][time][game].Black] ? teams[weeks[week][time][game].Black].Name : 'BYE' %> vs <%= teams[weeks[week][time][game].White] ? teams[weeks[week][time][game].White].Name : 'BYE' %> </form><br><br></span>
 							<% } %>
 							<hr>
 						<% } %>

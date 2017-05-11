@@ -94,6 +94,7 @@ router.post('/login', function(req, res) {
 });
 
 router.post('/admin/teams', function(req, res) { // Do the teams and schedule thing
+	firebase.storePrevious();
 	variables.teamNames = [];
 	for (let team of Object.values(req.body)) { // Team is now the name of the team
 		variables.teamNames.push(team);
