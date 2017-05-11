@@ -32,16 +32,19 @@
                         <div id="ScheduleMainDiv">
 							<%for (var week in weeks) { %>
 								<h2>Week <%= week %></h2>
-								<% for (var time in week) { %>
-									<h3 style="text-indent: 3em;">Game #<%= time %></h3>
-									<% for (var game in time) { %>
+								<% for (var time in weeks[week]) { %>
+									<h3 style="text-indent: 3em;">Time #<%= time %></h3>
+									<% for (var game in weeks[week][time]) { %>
+										<p style ="text-indent: 12em;"><%= teams[weeks[week][time][game].Black].Name %> vs <%= teams[weeks[week][time][game].White].Name %></p>
 									<% } %>
 								<% } %>
 							<% } %>
-							<h2> Week 1</h2>
+
+							<!--<h2> Week 1</h2>
 							<h3 style="text-indent: 3em;"> 10:00 AM </h3>
 							<p style ="text-indent: 12em;"> Team1 VS Team2 </p>
 							<p style ="text-indent: 12em;"> Team3 VS Team4</p>
+							Above is the template-->
                         </div>
                     </div>
                 </section>

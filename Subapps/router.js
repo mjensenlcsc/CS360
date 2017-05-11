@@ -16,24 +16,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/schedule', function(req, res) {
-	let sorted = {};
-	Object.keys(variables.weeks).sort().forEach(function(key) {
-		sorted[key] = variables.weeks[key];
-	});
-
-	console.log(sorted['2'])
-	for (var week in sorted) {
-		console.log('<h2>Week ' + week + ' </h2>');
-		 for (var time in week) {
-			console.log(time)
-			console.log('<h3 style="text-indent: 3em;">Game # ' + time);
-			 for (var game in time) {
-			 }
-		 }
-	 }
-
-
-	res.render('schedule', {weeks: sorted, teams: variables.teams});
+	res.render('schedule', {weeks: variables.weeks, teams: variables.teams});
 });
 
 router.get('/scores', function(req, res) {
