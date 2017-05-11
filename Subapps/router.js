@@ -118,6 +118,30 @@ router.post('/admin/modifyaccount', function(req, res) {
 	}
 });
 
+router.post('/admin/createaccount', function(req, res) {
+	if (req.body.password === req.body.passwordC) {
+		if (req.body.password.length < 6) {
+			req.flash('message', 'Password must be at least 6 characters long.');
+			res.redirect('/admin/account');
+			return;
+		}
+		firebase.firebase.auth().createUserWithEmailAndPassword(req.body.username + '@chess.com', req.body.password).then(function() {
+			req.flash('message', 'Account created.');
+			res.redirect('/admin/account');
+		}).catch(function(err) {
+			let errCode = err.code;
+			let errMessage = err.message;
+
+			console.log(err);
+			req.flash('message', errCode);
+			res.redirect('/admin/account');
+		});
+	} else {
+		req.flash('message', 'Passwords do not match.');
+		res.redirect('/admin/account');
+	}
+});
+
 
 module.exports = {
 	router: router
