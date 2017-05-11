@@ -16,11 +16,32 @@ router.get('/', function(req, res) {
 });
 
 router.get('/schedule', function(req, res) {
-	res.render('schedule');
+	let sorted = {};
+	Object.keys(variables.weeks).sort().forEach(function(key) {
+		sorted[key] = variables.weeks[key];
+	});
+
+	console.log(sorted['2'])
+	for (var week in sorted) {
+		console.log('<h2>Week ' + week + ' </h2>');
+		 for (var time in week) {
+			console.log(time)
+			console.log('<h3 style="text-indent: 3em;">Game # ' + time);
+			 for (var game in time) {
+			 }
+		 }
+	 }
+
+
+	res.render('schedule', {weeks: sorted, teams: variables.teams});
 });
 
 router.get('/scores', function(req, res) {
-	ejs.renderFile(__dirname + '/../Views/scores.ejs', {teams: variables.teams}, function(err, str){
+	let sorted = [];
+	for (team in variables.teams) sorted.push(variables.teams[team]);
+	sorted.sort(function(a,b){return a.Name.localeCompare(b.Name)});
+
+	ejs.renderFile(__dirname + '/../Views/scores.ejs', {teams: sorted}, function(err, str){
 		res.end(ejs.render(str))
 	});
 });
@@ -125,7 +146,9 @@ router.post('/admin/createaccount', function(req, res) {
 			res.redirect('/admin/account');
 			return;
 		}
+		let user = firebase.firebase.auth().currentUser;
 		firebase.firebase.auth().createUserWithEmailAndPassword(req.body.username + '@chess.com', req.body.password).then(function() {
+			firebase.firebase.auth().currentUser = user;
 			req.flash('message', 'Account created.');
 			res.redirect('/admin/account');
 		}).catch(function(err) {

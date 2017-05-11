@@ -30,6 +30,14 @@
                 <section class="mdl-layout__tab-panel is-active" id="ScheduleMainTab">
                     <div class="page-content">
                         <div id="ScheduleMainDiv">
+							<%for (var week in weeks) { %>
+								<h2>Week <%= week %></h2>
+								<% for (var time in week) { %>
+									<h3 style="text-indent: 3em;">Game #<%= time %></h3>
+									<% for (var game in time) { %>
+									<% } %>
+								<% } %>
+							<% } %>
 							<h2> Week 1</h2>
 							<h3 style="text-indent: 3em;"> 10:00 AM </h3>
 							<p style ="text-indent: 12em;"> Team1 VS Team2 </p>

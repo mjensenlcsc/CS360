@@ -21,6 +21,16 @@ let config = {
 };
 firebase.initializeApp(config);
 let db = firebase.database();
+loadSchedle();
+
+function loadSchedle() {
+	firebase.database().ref('current').once('value').then(function(snap) {
+		variables.games = snap.val().games;
+		variables.teams = snap.val().teams;
+		variables.weeks = snap.val().weeks;
+		console.log('Loaded schedule.');
+	});
+}
 
 function createSchedule(teamNames) {
 	teamNames = random.shuffle(teamNames);
