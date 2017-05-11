@@ -35,6 +35,7 @@
 						<% for (var time in weeks[week]) { %>
 							<h3 style="text-indent: 3em;">Time #<%= time %></h3>
 							<% for (var game in weeks[week][time]) { %>
+								<% if (weeks[week][time][game] == null) continue; %>
 								<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%= week.toString() + time.toString() + game.toString()%>1">
 									<input type="radio" id="<%= week.toString() + time.toString() + game.toString()%>1" class="mdl-radio__button" name="<%= week.toString() + time.toString() + game.toString()%>" value="1">
 									<span class="mdl-radio__label"><%= teams[weeks[week][time][game].Black].Name %></span>
@@ -53,7 +54,6 @@
 						<% } %>
 						<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Confirm" form="all">
 					<% } %>
-					<br><input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Confirm" form="all">
 				</form>
 			</main>
         </div>

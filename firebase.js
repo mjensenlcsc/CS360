@@ -89,13 +89,23 @@ function createSchedule(teamNames) {
 }
 module.exports.createSchedule = createSchedule;
 
-function addWin(winner, game) {
+function setSchedule() {
+	db.ref('current/weeks').update(variables.weeks);
+	db.ref('current/games').update(variables.games);
+}
+module.exports.setSchedule = setSchedule;
+
+function addWin(winner, loser, game) {
 	if (variables.games[game].Winner) return;
 	variables.teams[winner].Score += 5;
 	variables.teams[winner].Record.Wins++;
+	variables.teams[loser].Score += 1;
+	variables.teams[loser].Record.Losses++;
 	db.ref('current/teams/' + winner).update(variables.teams[winner]);
 	variables.games[game].Winner = winner;
+	variables.games[game].Loser = loser;
 	db.ref('current/games/' + game).update(variables.games[game]);
+	db.ref('current/teams/' + loser).update(variables.teams[loser]);
 }
 module.exports.addWin = addWin;
 

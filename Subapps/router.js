@@ -52,12 +52,12 @@ router.get('/admin/logout', function(req, res) {
 });
 
 router.get('/admin/schedule', function(req, res) {
-	if (variables.teamNames.length < 2) {
+	if (!variables.teams['0']) {
 		req.flash('message', 'You must add teams before you can modify the schedule.');
 		res.redirect('/admin/teams');
 		return;
 	}
-	res.render('admin/schedule');
+	res.render('admin/schedule', {weeks: variables.weeks, teams: variables.teams, message: req.flash('message')});
 });
 
 router.get('/admin/scores', function(req, res) {
@@ -157,17 +157,100 @@ router.post('/admin/scores', function(req, res) {
 		let GAME = variables.weeks[week][time][game];
 
 		if (result === 1) { // Black won
-			firebase.addWin(GAME.Black, score);
-			firebase.addLoss(GAME.White, score);
+			firebase.addWin(GAME.Black, GAME.White, score);
 		} else if (result === 2) { // White won
-			firebase.addWin(GAME.White, score);
-			firebase.addLoss(GAME.Black, score);
+			firebase.addWin(GAME.White, GAME.Black, score);
 		} else if (result === 3) { //Draw
 			firebase.addDraw(GAME.White, GAME.Black, score);
 		} else {
 			console.error('Someone did something wrong.')
 		}
 	}
+
+	req.flash('message', 'Scores updated.');
+	res.redirect('/admin/scores');
+});
+
+router.post('/admin/schedule', function(req, res) {
+	let week = Math.floor(req.body.id / 100);
+	let time = Math.floor((req.body.id - week * 100) / 10);
+	let game = Math.floor(req.body.id - week * 100 - time * 10);
+	let GAME = variables.weeks[week][time][game];
+
+	for (let i = 1; i < 9; i++) {
+		if (variables.weeks[i] == null) { // The first empty week
+			let id = i * 100 + 11;
+			variables.weeks[i] = {
+				'1': {
+					'1': {
+						White: GAME.White,
+						Black: GAME.Black,
+						_id:  id
+					}
+				}
+			};
+			variables.games[i.toString() + '11'] = {
+				Black: GAME.Black,
+				White: GAME.White
+			};
+			variables.games[week * 100 + time * 10 + game] = null;
+			variables.weeks[week][time][game] = null;
+			req.flash('message', 'Rescheduled');
+			res.redirect('/admin/schedule');
+			firebase.setSchedule();
+			return;
+		}
+		for (let t = 1; t < 4; t++) {
+			if (variables.weeks[i][t] == null) { // The first empty time slot of the week
+				let id = i * 100 + t * 10 + 1;
+				variables.weeks[i][t] = {
+					'1': {
+						White: GAME.White,
+						Black: GAME.Black,
+						_id:  id
+					},
+				};
+				variables.games[i.toString() + t.toString() + '1'] = {
+					Black: GAME.Black,
+					White: GAME.White
+				};
+				variables.games[week * 100 + time * 10 + game] = null;
+				variables.weeks[week][time][game] = null;
+				req.flash('message', 'Rescheduled');
+				res.redirect('/admin/schedule');
+				firebase.setSchedule();
+				return;
+			}
+			let playing = false;
+			let notTaken = [1, 2, 3, 4, 5, 6];
+			for (let g = 1; g < 6; g++) {
+				if (variables.weeks[i][t][g] != null) {
+					if (variables.weeks[i][t][g].White === GAME.White || variables.weeks[i][t][g].White === GAME.Black || variables.weeks[i][t][g].Black === GAME.White || variables.weeks[i][t][g].Black === GAME.Black) playing = true;
+					notTaken.splice(notTaken.indexOf(g), 1);
+				}
+			}
+			if (playing) continue; // If either team is in this time slot, don't set them here
+
+			let id = i * 100 + t * 10 + notTaken[0];
+			variables.weeks[i][t][notTaken[0]] = {
+				White: GAME.White,
+				Black: GAME.Black,
+				_id:  id
+			};
+			variables.games[i.toString() + t.toString() + notTaken[0].toString()] = {
+				Black: GAME.Black,
+				White: GAME.White
+			};
+			variables.games[week * 100 + time * 10 + game] = null;
+			variables.weeks[week][time][game] = null;
+			req.flash('message', 'Rescheduled');
+			res.redirect('/admin/schedule');
+			firebase.setSchedule();
+			return;
+		}
+	}
+	req.flash('message', 'The game could not be rescheduled.');
+	res.redirect('/admin/schedule');
 });
 
 
